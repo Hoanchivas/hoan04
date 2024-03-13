@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input onclick="baitoanbfs()" type="submit" value="baitoanbfs">
+    <script>
+        function baitoanbfs(){ 
+
+            class TreeNode {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function BFS(root) {
+    if (!root) return;
+
+    const queue = [root];
+    const result = [];
+
+    while (queue.length > 0) {
+        const node = queue.shift();
+        result.push(node.value);
+
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+    }
+
+    return result;
+}
+
+// Tạo một cây nhị phân đơn giản
+const root = new TreeNode(1);
+root.left = new TreeNode(2);
+root.right = new TreeNode(3);
+root.left.left = new TreeNode(4);
+root.left.right = new TreeNode(5);
+root.right.left = new TreeNode(6);
+root.right.right = new TreeNode(7);
+
+// Duyệt cây nhị phân bằng BFS
+console.log("Duyệt cây nhị phân bằng BFS:");
+console.log(BFS(root)); // Kết quả: [1, 2, 3, 4, 5, 6, 7]
+
+    }
+</script>
+</body>
+</html>

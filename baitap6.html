@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input onclick="baitoanprim()" type="submit" value="baitoanprim">
+    <script>
+        function baitclass Graph {
+    constructor(vertices) {
+        this.vertices = vertices;
+        this.adjacencyList = new Map();
+    }
+
+    addVertex(vertex) {
+        this.adjacencyList.set(vertex, []);
+    }
+
+    addEdge(source, destination, weight) {
+        this.adjacencyList.get(source).push({ destination, weight });
+        this.adjacencyList.get(destination).push({ source, weight });
+    }
+
+    primMST() {
+        const visited = new Set();
+        const minimumSpanningTree = [];
+        const startVertex = this.adjacencyList.keys().next().value; // Chọn một đỉnh bất kỳ làm đỉnh xuất phát
+
+        visited.add(startVertex);
+
+        while (visited.size < this.vertices) {
+            let minWeight = Infinity;
+            let nextVertexToAdd;
+
+            visited.forEach(visitedVertex => {
+                this.adjacencyList.get(visitedVertex).forEach(neighbor => {
+                    if (!visited.has(neighbor.destination) && neighbor.weight < minWeight) {
+                        minWeight = neighbor.weight;
+                        nextVertexToAdd = neighbor;
+                    }
+                });
+            });
+
+            minimumSpanningTree.push(nextVertexToAdd);
+            visited.add(nextVertexToAdd.destination);
+        }
+
+        return minimumSpanningTree;
+    }
+}
+
+// Ví dụ về việc sử dụng thuật toán Prim
+const g = new Graph(6);
+const vertices = ['A', 'B', 'C', 'D', 'E', 'F'];
+
+vertices.forEach(vertex => g.addVertex(vertex));
+
+g.addEdge('A', 'B', 2);
+g.addEdge('A', 'C', 3);
+g.addEdge('B', 'C', 1);
+g.addEdge('B', 'D', 1);
+g.addEdge('B', 'E', 4);
+g.addEdge('C', 'F', 5);
+g.addEdge('D', 'E', 3);
+g.addEdge('E', 'F', 2);
+
+console.log("Cây bao phủ trọng số nhỏ nhất (Minimum Spanning Tree):");
+console.log(g.primMST());
+oanprim(){ 
+
+    }
+</script>
+</body>
+</html>

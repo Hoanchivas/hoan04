@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input onclick="baitoanfloyd()" type="submit" value="baitoanfloyd">
+    <script>
+        function baitoanfloyd(){
+            const INF = Infinity;
+
+function floydWarshall(graph) {
+    const V = graph.length;
+    const dist = Array.from({ length: V }, () => Array.from({ length: V }, () => INF));
+
+    // Khởi tạo các khoảng cách ban đầu từ các cạnh có trọng số
+    for (let i = 0; i < V; i++) {
+        for (let j = 0; j < V; j++) {
+            if (i === j) {
+                dist[i][j] = 0;
+            } else if (graph[i][j] !== 0) {
+                dist[i][j] = graph[i][j];
+            }
+        }
+    }
+
+    // Tính toán các khoảng cách ngắn nhất giữa các cặp đỉnh
+    for (let k = 0; k < V; k++) {
+        for (let i = 0; i < V; i++) {
+            for (let j = 0; j < V; j++) {
+                if (dist[i][k] !== INF && dist[k][j] !== INF && dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    return dist;
+}
+
+// Ví dụ về đồ thị có trọng số âm
+const graph = [
+    [0, 1, INF, INF, -1],
+    [INF, 0, -2, INF, INF],
+    [INF, INF, 0, 2, INF],
+    [INF, INF, INF, 0, INF],
+    [4, INF, INF, 3, 0]
+];
+
+console.log("Khoảng cách ngắn nhất giữa tất cả các cặp đỉnh:");
+console.log(floydWarshall(graph));
+
+        }
+
+    
+</script>
+</body>
+</html>
